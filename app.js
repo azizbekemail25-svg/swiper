@@ -1,49 +1,39 @@
-const slides = document.querySelectorAll('.carousel-slide');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-let currentSlide = 0;
+const slayderlar = document.querySelectorAll('.carousel-slide');
 
-function showSlide(index) {
-    if (index >= slides.length) {
-        currentSlide = 0;
-    } else if (index < 0) {
-        currentSlide = slides.length - 1;
-    } else {
-        currentSlide = index;
+const oldingi = document.getElementById('prevBtn');
+const keyingi = document.getElementById('nextBtn');
+
+let raqam = 0;
+
+function korsat(son) {
+    if (son >= slayderlar.length) {
+        son = 0;
+    } else if (son < 0) {
+        son = slayderlar.length - 1;
     }
 
-    slides.forEach(slide => slide.classList.remove('active'));
-    
-    slides[currentSlide].classList.add('active');
+    raqam = son;
 
-    console.log(`slayd indexsi: ${currentSlide}`);
+        slayderlar.forEach(slayd => slayd.classList.remove('active'));
+
+        slayderlar[raqam].classList.add('active');
 }
 
-nextBtn.addEventListener('click', () => {
-    showSlide(currentSlide + 1);
+keyingi.addEventListener('click', () => {
+    korsat(raqam + 1);
 });
 
-prevBtn.addEventListener('click', () => {
-    showSlide(currentSlide - 1);
+oldingi.addEventListener('click', () => {
+    korsat(raqam - 1);
 });
 
-
-const swiper = new Swiper(".mySwiper", {
-    loop: true,                   
-    autoplay: {
-        delay: 2500,               
-        disableOnInteraction: false,
-    },
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,                 
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
+const swiper = new Swiper('.mySwiper', {
+    loop: true,
+    autoplay: { delay: 2500, disableOnInteraction: false },
+    pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
 });
 
-swiper.on('slideChange', function () {
-    console.log('Swiper faol slayd indeksi oʻzgardi:', swiper.realIndex);
+swiper.on('slideChange', () => {
+    console.log('Slayd o‘zgardi');
 });
